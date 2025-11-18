@@ -54,7 +54,7 @@ export function Verif() {
     });
   }, [sessionURL]);
 
-  if (isFinished) {
+  if (!isFinished) {
     return (
       <div className="flex h-svh w-full flex-col items-center justify-center">
         <h1 className="text-2xl font-bold">Verification finished</h1>
