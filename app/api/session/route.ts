@@ -8,9 +8,12 @@ function generateSignature(payload: any, secret: string) {
     payload = JSON.stringify(payload);
   }
 
-  if (payload.constructor !== Buffer) {
-    payload = Buffer.from(payload, "utf8");
-  }
+  // if (payload.constructor !== Buffer) {
+  //   console.log("here?");
+  //   payload = Buffer.from(payload, "utf8");
+  // }
+
+  console.log("payload", payload);
 
   const signature = crypto.createHmac("sha256", secret);
   signature.update(payload);
