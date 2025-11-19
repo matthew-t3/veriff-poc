@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid signature" }, { status: 401 });
   }
 
-  console.log("signature verified successfully");
+  console.log("signature verified successfully", receivedSignature);
   console.log("body", body);
 
   return Response.json({}, { status: 200 });
