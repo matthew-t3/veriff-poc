@@ -28,8 +28,8 @@ export async function POST(request: Request) {
 
   // Verify signature using constant-time comparison to prevent timing attacks
   const isValid = crypto.timingSafeEqual(
-    Buffer.from(receivedSignature),
-    Buffer.from(expectedSignature)
+    new Uint8Array(Buffer.from(receivedSignature)),
+    new Uint8Array(Buffer.from(expectedSignature))
   );
 
   if (!isValid) {
