@@ -18,6 +18,7 @@ function generateSignature(payload: string | object, secret: string) {
 export async function POST(request: Request) {
   const body = await request.json();
   const receivedSignature = request.headers.get("x-hmac-signature");
+  console.log("headers", request.headers);
 
   if (!receivedSignature) {
     return Response.json({ error: "Signature is missing" }, { status: 401 });
