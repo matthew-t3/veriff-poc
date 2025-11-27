@@ -1,24 +1,4 @@
-import crypto from "crypto";
-const VERIF_URL = "https://api.veriff.me/v1";
-const API_TOKEN = process.env.API_TOKEN || "";
-const API_SECRET = process.env.API_SECRET || "";
-
-function generateSignature(payload: any, secret: string) {
-  if (payload.constructor === Object) {
-    payload = JSON.stringify(payload);
-  }
-
-  // if (payload.constructor !== Buffer) {
-  //   console.log("here?");
-  //   payload = Buffer.from(payload, "utf8");
-  // }
-
-  console.log("payload", payload);
-
-  const signature = crypto.createHmac("sha256", secret);
-  signature.update(payload);
-  return signature.digest("hex");
-}
+import { API_SECRET, API_TOKEN, generateSignature, VERIF_URL } from "../utils";
 
 export async function GET(_: Request) {
   const payload = {
