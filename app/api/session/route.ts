@@ -2,7 +2,11 @@ import { API_SECRET, API_TOKEN, generateSignature, VERIF_URL } from "../utils";
 
 export async function GET(_: Request) {
   const payload = {
-    verification: {},
+    verification: {
+      document: {
+        country: "AU",
+      },
+    },
   };
 
   const response = await fetch(VERIF_URL + "/sessions", {
