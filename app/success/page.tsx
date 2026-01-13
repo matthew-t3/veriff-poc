@@ -1,16 +1,29 @@
 "use client";
-
+import { faker } from "@faker-js/faker";
 import { useEffect } from "react";
-import { isWebView } from "../api/utils";
+
+import { isPostMessageSupported, isWebView } from "../api/utils";
 
 export default function SuccessPage() {
   const isInWebView = isWebView();
+  const isSupported = isPostMessageSupported();
 
   useEffect(() => {
-    if (!isInWebView) {
+    if (!isInWebView || !isSupported) {
       return;
     }
-  }, [isInWebView]);
+
+    console.log("here?");
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify({
+        type: "KYC_SUCCESS",
+        payload: {
+          name: faker.person.fullName(),
+          email: faker.internet.email(),
+        },
+      })
+    );
+  }, [isInWebView, isSupported]);
 
   return (
     <div className="flex h-svh w-full flex-col items-center justify-center">

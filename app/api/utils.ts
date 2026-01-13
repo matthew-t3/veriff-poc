@@ -78,3 +78,11 @@ export function isWebView(): boolean {
     (isIOSWebView && hasWebViewCharacteristics)
   );
 }
+
+export function isPostMessageSupported(): boolean {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return typeof window?.ReactNativeWebView?.postMessage === "function";
+}

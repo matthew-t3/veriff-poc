@@ -10,7 +10,7 @@ export function HomePage() {
 
   useEffect(() => {
     function getSession() {
-      if (hasTriggered.current && sessionURL) {
+      if (hasTriggered.current || sessionURL) {
         return;
       }
 
@@ -20,7 +20,6 @@ export function HomePage() {
       fetch("/api/session")
         .then((res) => res.json())
         .then((data) => {
-          console.log("data", data);
           setSessionURL(data.verification.url);
           setIsLoading(false);
           hasTriggered.current = false;
@@ -39,15 +38,6 @@ export function HomePage() {
     window.location.href = sessionURL;
     // Set state asynchronously to avoid cascading renders
   }, [sessionURL, isInWebView]);
-
-  useEffect(() => {
-    if (!isInWebView) {
-      return;
-    }
-
-    console.log("here", window.postMessage);
-    window.postMessage({ type: "hello", payload: "world" });
-  }, [isInWebView]);
 
   return (
     <div className="flex h-svh w-full flex-col items-center justify-center">
