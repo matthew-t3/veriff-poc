@@ -1,10 +1,12 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { isWebView } from "../api/utils";
 
 export function HomePage() {
   const hasTriggered = useRef(false);
   const [sessionURL, setSessionURL] = useState("");
+  const router = useRouter();
   const [, setIsLoading] = useState(false);
   const isInWebView = typeof window !== "undefined" ? isWebView() : false;
 
@@ -35,9 +37,10 @@ export function HomePage() {
       return;
     }
 
-    window.location.href = sessionURL;
+    router.push("/success");
+    // window.location.href = sessionURL;
     // Set state asynchronously to avoid cascading renders
-  }, [sessionURL, isInWebView]);
+  }, [sessionURL, isInWebView, router]);
 
   return (
     <div className="flex h-svh w-full flex-col items-center justify-center">
