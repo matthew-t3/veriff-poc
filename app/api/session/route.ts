@@ -3,6 +3,7 @@ import { API_SECRET, API_TOKEN, generateSignature, VERIF_URL } from "../utils";
 export async function GET(_: Request) {
   const payload = {
     verification: {
+      callback: "https://veriff-poc.vercel.app/success",
       document: {
         country: "AU",
       },
