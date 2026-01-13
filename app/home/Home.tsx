@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import SuccessPage from "../success/page";
 
 // Extend Window interface for webview detection
 interface WindowWithWebView extends Window {
@@ -68,6 +69,7 @@ function isWebView(): boolean {
 export function HomePage() {
   const hasTriggered = useRef(false);
   const [sessionURL, setSessionURL] = useState("");
+  const [hasFinished, setHasFinished] = useState(false);
   const [, setIsLoading] = useState(false);
   const isInWebView = typeof window !== "undefined" ? isWebView() : false;
 
@@ -100,7 +102,15 @@ export function HomePage() {
     }
 
     window.location.href = sessionURL;
+    // Set state asynchronously to avoid cascading renders
+    setTimeout(() => {
+      setHasFinished(true);
+    }, 0);
   }, [sessionURL, isInWebView]);
+
+  if (hasFinished) {
+    return <SuccessPage />;
+  }
 
   return (
     <div className="flex h-svh w-full flex-col items-center justify-center">

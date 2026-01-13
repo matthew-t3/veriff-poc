@@ -49,9 +49,7 @@ function isWebView(): boolean {
 
   // Check for iOS WebView (UIWebView or WKWebView)
   const isIOSWebView =
-    /iphone|ipad|ipod/.test(userAgent) &&
-    !nav.standalone &&
-    !win.MSStream;
+    /iphone|ipad|ipod/.test(userAgent) && !nav.standalone && !win.MSStream;
 
   // Additional check: webviews often don't have certain browser features
   const hasWebViewCharacteristics = !win.chrome;
