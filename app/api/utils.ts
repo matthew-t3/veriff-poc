@@ -22,13 +22,6 @@ export function generateSignature(payload: any, secret: string) {
   return signature.digest("hex");
 }
 
-// Extend Window interface for webview detection
-interface WindowWithWebView extends Window {
-  ReactNativeWebView?: unknown;
-  MSStream?: unknown;
-  chrome?: unknown;
-}
-
 interface NavigatorWithStandalone extends Navigator {
   standalone?: boolean;
 }
@@ -42,7 +35,7 @@ export function isWebView(): boolean {
     return false;
   }
 
-  const win = window as WindowWithWebView;
+  const win = window;
   const nav = window.navigator as NavigatorWithStandalone;
   const userAgent = nav.userAgent.toLowerCase();
 

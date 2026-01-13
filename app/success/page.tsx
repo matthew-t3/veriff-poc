@@ -13,7 +13,7 @@ export default function SuccessPage() {
       return;
     }
 
-    window.ReactNativeWebView.postMessage(
+    window?.ReactNativeWebView?.postMessage?.(
       JSON.stringify({
         type: "KYC_SUCCESS",
         payload: {

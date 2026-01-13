@@ -2,13 +2,6 @@
 import { createVeriffFrame, MESSAGES } from "@veriff/incontext-sdk";
 import { useEffect, useState } from "react";
 
-// Extend Window interface for webview detection
-interface WindowWithWebView extends Window {
-  ReactNativeWebView?: unknown;
-  MSStream?: unknown;
-  chrome?: unknown;
-}
-
 interface NavigatorWithStandalone extends Navigator {
   standalone?: boolean;
 }
@@ -22,7 +15,7 @@ function isWebView(): boolean {
     return false;
   }
 
-  const win = window as WindowWithWebView;
+  const win = window;
   const nav = window.navigator as NavigatorWithStandalone;
   const userAgent = nav.userAgent.toLowerCase();
 
